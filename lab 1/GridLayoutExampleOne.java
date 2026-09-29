@@ -1,30 +1,110 @@
-import java.awt.GridLayout;
- import javax.swing.*;
+import javax.swing.*;
+import java.awt.*;
 
-public class GridLayoutExampleOne extends JFrame{
+public class GridLayoutExampleOne extends JFrame {
 
     public GridLayoutExampleOne() {
 
-        // frame size, bounds & titles
-        setTitle("GridLayout Example");
-        setBounds(100, 150, 350, 450); // x, Y, width & height
+        setTitle("Swing Layout Manager Examples");
 
-        setLayout(new GridLayout()); // default grid layout
-        JButton one = new JButton("JButton One");
+        setSize(700, 500);
 
-        JButton two = new JButton("JButton Two");
-        JButton three = new JButton("JButton Three");
-        JButton four = new JButton("JButton Four");
-
-        add (one) ; 
-        add (two);
-        add (three);
-        add (four);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+
+        setLocationRelativeTo(null);
+
+        // Main window using BorderLayout
+        setLayout(new BorderLayout(10, 10));
+
+        // =========================
+        // NORTH - FlowLayout
+        // =========================
+
+        JPanel northPanel = new JPanel(new FlowLayout());
+
+        northPanel.add(new JButton("Button 1"));
+        northPanel.add(new JButton("Button 2"));
+        northPanel.add(new JButton("Button 3"));
+
+        add(northPanel, BorderLayout.NORTH);
+
+
+        // =========================
+        // CENTER - GridLayout
+        // =========================
+
+        JPanel centerPanel =
+                new JPanel(new GridLayout(2, 3, 10, 10));
+
+        centerPanel.add(new JButton("1"));
+        centerPanel.add(new JButton("2"));
+        centerPanel.add(new JButton("3"));
+        centerPanel.add(new JButton("4"));
+        centerPanel.add(new JButton("5"));
+        centerPanel.add(new JButton("6"));
+
+        add(centerPanel, BorderLayout.CENTER);
+
+
+        // =========================
+        // SOUTH - FlowLayout
+        // =========================
+
+        JPanel southPanel = new JPanel(new FlowLayout());
+
+        southPanel.add(new JLabel("South Panel"));
+
+        add(southPanel, BorderLayout.SOUTH);
+
+
+        // =========================
+        // WEST - BoxLayout
+        // =========================
+
+        JPanel westPanel = new JPanel();
+
+        westPanel.setLayout(
+                new BoxLayout(westPanel, BoxLayout.Y_AXIS)
+        );
+
+        westPanel.add(new JButton("Home"));
+        westPanel.add(Box.createVerticalStrut(10));
+
+        westPanel.add(new JButton("Student"));
+        westPanel.add(Box.createVerticalStrut(10));
+
+        westPanel.add(new JButton("Faculty"));
+
+        add(westPanel, BorderLayout.WEST);
+
+
+        // =========================
+        // EAST - GridLayout
+        // =========================
+
+        JPanel eastPanel =
+                new JPanel(new GridLayout(3, 1, 5, 5));
+
+        eastPanel.add(new JButton("A"));
+        eastPanel.add(new JButton("B"));
+        eastPanel.add(new JButton("C"));
+
+        add(eastPanel, BorderLayout.EAST);
     }
-    
-    public static void main (String args[]){
-        new GridLayoutExampleOne();
+
+
+    // =========================
+    // MAIN METHOD
+    // =========================
+
+    public static void main(String[] args) {
+
+        SwingUtilities.invokeLater(() -> {
+
+            GridLayoutExampleOne frame =
+                    new GridLayoutExampleOne();
+
+            frame.setVisible(true);
+        });
     }
 }
